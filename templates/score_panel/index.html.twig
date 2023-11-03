@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ScorePanelController!{% endblock %}
+
+{% block body %}
+    <main class="mt-4">
+        <table class="max-w-3xl bg-gray-100 rounded-md block mx-auto p-4">
+            <thead class="block">
+            <tr class="grid grid-cols-2 w-full font-medium mb-2">
+                <td>Nom</td>
+                <td>Score</td>
+            </tr>
+            </thead>
+            <tbody class="block">
+            <tr class="grid grid-cols-2 w-full gap-y-2">
+                {% for user in users %}
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.score }}</td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

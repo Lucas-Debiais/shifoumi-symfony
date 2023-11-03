@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a {
+  transition: color .25s ease;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    display: block;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform .25s ease;
+    width: 100%;
+    background-color: currentColor;
+  }
+
+  &:hover {
+    @apply text-cyan-500;
+
+    &::after {
+      transform: none;
+      transform-origin: left center;
+    }
+  }
+}
