@@ -15,7 +15,6 @@ class ScorePanelController extends AbstractController
         $users = $userRepo->findAll();
 
         return $this->render('score_panel/index.html.twig', [
-            'controller_name' => 'ScorePanelController',
             'users' => $users
         ]);
     }

@@ -2,6 +2,7 @@
     <ul class="flex items-center justify-end gap-4 font-medium p-4">
         <li><a href="{{ path('app_score_panel') }}">Tableau des scores</a></li>
         {% if app.user %}
+            <li><a href="{{ path('app_game') }}">Jeu</a></li>
             <li><a href="">Profil</a></li>
         {% else %}
             <li><a href="{{ path('app_login') }}">Connexion</a></li>

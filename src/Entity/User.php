@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: 'users')]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -32,8 +35,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column]
-    private int $score = 0;
+    #[ORM\OneToMany(mappedBy: 'whoWin', targetEntity: Party::class)]
+    private Collection $win;
+
+    public function __construct()
+    {
+        $this->win = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,14 +125,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getScore(): int
+    /**
+     * @return Collection<int, Party>
+     */
+    public function getWin(): Collection
     {
-        return $this->score;
+        return $this->win;
     }
 
-    public function setScore(string $score): self
+    public function addWin(Party $win): static
     {
-        $this->score = $score;
+        if (!$this->win->contains($win)) {
+            $this->win->add($win);
+            $win->setWhoWin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWin(Party $win): static
+    {
+        if ($this->win->removeElement($win)) {
+            // set the owning side to null (unless already changed)
+            if ($win->getWhoWin() === $this) {
+                $win->setWhoWin(null);
+            }
+        }
 
         return $this;
     }

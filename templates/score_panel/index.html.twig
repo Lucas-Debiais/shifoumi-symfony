@@ -15,7 +15,7 @@
             <tr class="grid grid-cols-2 w-full gap-y-2">
                 {% for user in users %}
                     <td>{{ user.username }}</td>
-                    <td>{{ user.score }}</td>
+                    <td>{{ user.win|length }}</td>
                 {% endfor %}
             </tr>
             </tbody>
