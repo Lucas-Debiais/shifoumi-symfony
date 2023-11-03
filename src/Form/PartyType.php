@@ -21,7 +21,7 @@ class PartyType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('Enregistrer', SubmitType::class)
+            ->add('Save', SubmitType::class)
         ;
     }
 
