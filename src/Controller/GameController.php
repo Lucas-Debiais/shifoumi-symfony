@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Enum\Choices;
 use App\Form\PartyType;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class GameController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/game', name: 'app_game')]
-    public function index(Request $request, EntityManagerInterface $em, Security $security): Response
+    public function index(Request $request, EntityManagerInterface $em, Security $security, LoggerInterface $logger): Response
     {
 
         $party = new Party();
@@ -27,7 +28,6 @@ class GameController extends AbstractController
         $form->handleRequest($request);
 
         $choices = Choices::cases();
-//        Choices::from($choice)
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $security->getUser();
@@ -58,9 +58,13 @@ class GameController extends AbstractController
             $this->addFlash('success', 'Party bien ajoutée');
         }
 
+        $logger->info('Nouvelle partie', ['Winner' => $winner ? $winner->getUsername() : 'Égalité']);
+
         return $this->render('game/index.html.twig', [
             'choices' => $choices,
             'form' => $form->createView(),
         ]);
     }
+
+
 }
