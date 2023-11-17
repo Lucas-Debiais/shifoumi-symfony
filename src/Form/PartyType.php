@@ -17,6 +17,7 @@ class PartyType extends AbstractType
 
         $builder
             ->add('choice_1', EnumType::class, [
+                'label' => 'Make your choice',
                 'class' => Choices::class,
                 'expanded' => true,
                 'multiple' => false,

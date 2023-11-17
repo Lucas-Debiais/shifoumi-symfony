@@ -1,12 +1,12 @@
 <nav>
     <ul class="flex items-center justify-end gap-4 font-medium p-4">
-        <li><a href="{{ path('app_score_panel') }}">Tableau des scores</a></li>
+        <li><a href="{{ path('app_scoreboard') }}">{{ 'nav.scoreboard'|trans }}</a></li>
         {% if app.user %}
-            <li><a href="{{ path('app_game') }}">Jeu</a></li>
-            <li><a href="">Profil</a></li>
+            <li><a href="{{ path('app_game') }}">{{ 'nav.game'|trans }}</a></li>
+            <li><a href="">{{ 'nav.profile'|trans }}</a></li>
         {% else %}
-            <li><a href="{{ path('app_login') }}">Connexion</a></li>
-            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+            <li><a href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a></li>
+            <li><a href="{{ path('app_register') }}">{{ 'nav.register'|trans }}</a></li>
         {% endif %}
     </ul>
 </nav>

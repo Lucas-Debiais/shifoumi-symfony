@@ -1,4 +1,20 @@
+# Global
+Make your choice: Faites votre choix
 Rock: Pierre
 Paper: Feuille
 Scissors: Ciseaux
 Save: Enregistrer
+
+# Navigation
+nav:
+  scoreboard: Tableau des scores
+  profile: Profil
+  game: Jeu
+  login: Connexion
+  register: Inscription
+
+
+# Scoreboard
+scoreboard:
+  name: Nom
+  score: Score
