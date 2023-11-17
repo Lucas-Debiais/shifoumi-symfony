@@ -26,3 +26,46 @@ a {
     }
   }
 }
+
+.party {
+  min-height: calc(100vh - 58px);
+  @apply grid place-items-center;
+
+  &-form {
+    @apply max-w-3xl mx-auto text-center mb-4;
+
+    &__label {
+      @apply text-2xl mb-4 block font-bold;
+    }
+
+    .enum {
+      &__list {
+        @apply flex gap-4 items-center justify-center;
+      }
+
+      &__item {
+        label {
+          @apply block px-4 py-2 rounded-md cursor-pointer border border-black select-none transition-colors hover:bg-cyan-500 hover:text-white;
+        }
+
+        input {
+          @apply absolute start-[-9999px];
+
+          &:checked ~ label {
+            @apply bg-cyan-700 text-white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.submit {
+  &__wrapper {
+    @apply max-w-3xl mx-auto text-center;
+  }
+
+  &__button {
+    @apply px-4 py-2 rounded-md bg-gray-700 text-white select-none transition-colors hover:bg-gray-800;
+  }
+}

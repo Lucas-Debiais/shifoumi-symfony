@@ -17,12 +17,17 @@ class PartyType extends AbstractType
 
         $builder
             ->add('choice_1', EnumType::class, [
+                'row_attr' => ['class' => 'party-form'],
+                'label_attr' => ['class' => 'party-form__label'],
                 'label' => 'Make your choice',
                 'class' => Choices::class,
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('Save', SubmitType::class)
+            ->add('Save', SubmitType::class, [
+                'row_attr' => ['class' => 'submit__wrapper'],
+                'attr' => ['class' => 'submit__button']
+            ])
         ;
     }
 

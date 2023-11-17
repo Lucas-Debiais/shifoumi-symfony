@@ -1,0 +1,11 @@
+{# templates/form/enum_widget.html.twig #}
+{% block enum_widget %}
+    <div class="enum__list">
+        {% for child in form %}
+            <div class="enum__item">
+                {{ form_widget(child) }}
+                {{ form_label(child) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
