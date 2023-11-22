@@ -27,6 +27,11 @@ a {
   }
 }
 
+.home {
+  min-height: calc(100vh - 58px);
+  @apply max-w-3xl mx-auto text-center grid place-items-center;
+}
+
 .party {
   min-height: calc(100vh - 58px);
   @apply grid place-items-center;

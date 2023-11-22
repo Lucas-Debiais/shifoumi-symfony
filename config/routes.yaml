@@ -3,3 +3,24 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+api_games:
+    path: /api/games
+    controller: App\Controller\GameController::getGames
+    methods: [GET]
+
+api_game:
+    path: /api/games/{id}
+    controller: App\Controller\GameController::getGame
+    methods: [GET]
+
+api_players:
+    path: /api/players
+    controller: App\Controller\PlayerController::getPlayers
+    methods: [GET]
+
+api_player:
+    path: /api/players/{id}
+    controller: App\Controller\PlayerController::getPlayer
+    methods: [GET]
+

@@ -3,6 +3,10 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <main class="">
+    <main class="home">
+        <div>
+            <h1 class="text-3xl font-bold mb-4">Jeu du chifoumi</h1>
+            <a class="font-bold" href="{{ path('app_game') }}">Jouer</a>
+        </div>
     </main>
 {% endblock %}
