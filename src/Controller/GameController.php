@@ -12,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -22,7 +25,7 @@ class GameController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/game', name: 'app_game')]
-    public function index(Request $request, EntityManagerInterface $em, Security $security, LoggerInterface $logger): Response
+    public function index(Request $request, EntityManagerInterface $em, Security $security, LoggerInterface $logger, MailerInterface $mailer): Response
     {
 
         $party = new Party();
@@ -53,6 +56,8 @@ class GameController extends AbstractController
                 $winner = $partySubmit->getPlayer2();
             }
             $partySubmit->setWhoWin($winner);
+
+            $this->sendEmail($mailer, $winner, $user);
 
 
             $em->persist($partySubmit);
@@ -87,5 +92,30 @@ class GameController extends AbstractController
         $data = $serializer->normalize($party, null, ['groups' => 'group']);
 
         return new JsonResponse($data);
+    }
+
+    private function sendEmail(MailerInterface $mailer, User | null $winner, User $user): void
+    {
+        if ($winner === $user) {
+            $email = (new Email())
+                ->from('shifoumi@game.com')
+                ->to(new Address($user->getEmail(), $user->getUsername()))
+                ->subject('Victoire !')
+                ->text('Vous avez gagné !');
+        } else if ($winner) {
+            $email = (new Email())
+                ->from('shifoumi@game.com')
+                ->to(new Address($user->getEmail(), $user->getUsername()))
+                ->subject('Défaite...')
+                ->text('Vous avez perdu...');
+        } else {
+            $email = (new Email())
+                ->from('shifoumi@game.com')
+                ->to(new Address($user->getEmail(), $user->getUsername()))
+                ->subject('Match nul')
+                ->text('Une prochaine fois peut-être :)');
+        }
+
+        $mailer->send($email);
     }
 }
