@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Admin&Controller!{% endblock %}
+
+{% block body %}
+    {% for user in users %}
+        <div>
+            <span>{{ user.username }}</span>
+            {% if user.isBanned %}
+                <a href="{{ path('app_admin_unban', {'id': user.id}) }}">{{ 'admin.unban'|trans }}</a>
+            {% else %}
+                <a href="{{ path('app_admin_ban', {'id': user.id}) }}">{{ 'admin.ban'|trans }}</a>
+            {% endif %}
+            <a href="{{ path('app_admin_delete', {'id': user.id}) }}">{{ 'admin.delete'|trans }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}

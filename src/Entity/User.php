@@ -38,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'whoWin', targetEntity: Party::class)]
     private Collection $win;
 
+    #[ORM\Column]
+    private bool $isBanned = false;
+
     public function __construct()
     {
         $this->win = new ArrayCollection();
@@ -151,6 +154,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $win->setWhoWin(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsBanned(): bool
+    {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): static
+    {
+        $this->isBanned = $isBanned;
 
         return $this;
     }

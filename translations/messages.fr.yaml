@@ -12,7 +12,12 @@ nav:
   game: Jeu
   login: Connexion
   register: Inscription
+  logout: Déconnexion
 
+admin:
+  ban: Bannir
+  unban: Débannir
+  delete: Supprimer
 
 # Scoreboard
 scoreboard:
