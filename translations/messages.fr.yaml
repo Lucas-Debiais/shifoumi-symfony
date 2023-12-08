@@ -13,6 +13,7 @@ nav:
   login: Connexion
   register: Inscription
   logout: Déconnexion
+  admin: Administrateur
 
 admin:
   ban: Bannir

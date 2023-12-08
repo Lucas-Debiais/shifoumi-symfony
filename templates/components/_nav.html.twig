@@ -5,6 +5,9 @@
             <li><a href="{{ path('app_game') }}">{{ 'nav.game'|trans }}</a></li>
             <li><a href="{{ path('app_player') }}">{{ 'nav.profile'|trans }}</a></li>
             <li><a href="{{ path('app_logout') }}">{{ 'nav.logout'|trans }}</a></li>
+            {% if app.user.roles.0 is same as "ROLE_ADMIN" %}
+                <li><a href="{{ path('app_admin') }}">{{ 'nav.admin'|trans }}</a></li>
+            {% endif %}
         {% else %}
             <li><a href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a></li>
             <li><a href="{{ path('app_register') }}">{{ 'nav.register'|trans }}</a></li>
