@@ -23,3 +23,9 @@ admin:
 scoreboard:
   name: Nom
   score: Score
+
+# Login
+login:
+  username: Pseudo
+  password: Mot de passe
+  button: Connexion

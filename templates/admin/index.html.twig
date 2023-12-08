@@ -3,15 +3,19 @@
 {% block title %}Hello Admin&Controller!{% endblock %}
 
 {% block body %}
-    {% for user in users %}
-        <div>
-            <span>{{ user.username }}</span>
-            {% if user.isBanned %}
-                <a href="{{ path('app_admin_unban', {'id': user.id}) }}">{{ 'admin.unban'|trans }}</a>
-            {% else %}
-                <a href="{{ path('app_admin_ban', {'id': user.id}) }}">{{ 'admin.ban'|trans }}</a>
-            {% endif %}
-            <a href="{{ path('app_admin_delete', {'id': user.id}) }}">{{ 'admin.delete'|trans }}</a>
+    <main class="main-center">
+        <div class="bg-gray-100 py-4 px-8 rounded-md container max-w-3xl">
+            {% for user in users %}
+                <div class="my-4 flex justify-end">
+                    <span class="font-bold me-auto">{{ user.username }}</span>
+                    {% if user.isBanned %}
+                        <a class="mx-2" href="{{ path('app_admin_unban', {'id': user.id}) }}">{{ 'admin.unban'|trans }}</a>
+                    {% else %}
+                        <a class="mx-2" href="{{ path('app_admin_ban', {'id': user.id}) }}">{{ 'admin.ban'|trans }}</a>
+                    {% endif %}
+                    <a class="mx-2" href="{{ path('app_admin_delete', {'id': user.id}) }}">{{ 'admin.delete'|trans }}</a>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </main>
 {% endblock %}

@@ -74,3 +74,51 @@ a {
     @apply px-4 py-2 rounded-md bg-gray-700 text-white select-none transition-colors hover:bg-gray-800;
   }
 }
+
+.btn {
+  @apply bg-cyan-700 hover:bg-cyan-800 text-white px-4 py-2 rounded-md;
+}
+
+input {
+  &[type="text"],
+  &[type="password"] {
+    @apply border rounded-md;
+  }
+}
+
+.main-center {
+  min-height: calc(100vh - 58px);
+  @apply grid place-items-center;
+
+  table,
+  .container {
+    @apply min-w-[400px];
+  }
+}
+
+.login,
+[name="registration_form"] {
+  min-height: calc(100vh - 58px);
+  @apply max-w-3xl mx-auto grid place-content-center;
+
+  > div {
+    @apply flex flex-col
+  }
+
+  h1 {
+    @apply text-center text-3xl font-bold pb-8;
+  }
+
+  label {
+    @apply mb-2;
+  }
+
+  label,
+  input {
+    @apply mx-auto max-w-sm;
+  }
+
+  input {
+    @apply mb-8;
+  }
+}
