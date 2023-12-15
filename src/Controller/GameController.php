@@ -25,6 +25,7 @@ class GameController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/game', name: 'app_game')]
+    #[Route(path: '/{_locale}/game', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
     public function index(Request $request, EntityManagerInterface $em, Security $security, LoggerInterface $logger, MailerInterface $mailer): Response
     {
 
@@ -80,8 +81,8 @@ class GameController extends AbstractController
     #[Route('/api/games', name: 'api_games', methods: ['GET'])]
     public function getGames(SerializerInterface $serializer, EntityManagerInterface $em): JsonResponse
     {
-        $parties = $em->getRepository(Party::class)->findAll();
-        $data = $serializer->normalize($parties, null, ['groups' => 'group']);
+        $games = $em->getRepository(Party::class)->findAll();
+        $data = $serializer->normalize($games, null, ['groups' => 'group']);
 
         return new JsonResponse($data);
     }
